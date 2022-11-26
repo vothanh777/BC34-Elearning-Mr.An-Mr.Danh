@@ -1,0 +1,18 @@
+.nav-link {
+  color: white !important;
+}
+.btn-light {
+  color: #343a40;
+}
+.btn-outline-primary:hover {
+  color: white !important;
+}
+.courseSearch {
+  width: 300px;
+}
+
+@media (min-width: 1320px) {
+  .courseSearch {
+    width: 400px;
+  }
+}
