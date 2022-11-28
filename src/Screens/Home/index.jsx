@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../../Components/Carousel";
 import CourseItem from "../../Components/CourseItems";
+import Footer from "../../Layouts/Footer";
 import Header from "../../Layouts/Header";
 import { getCourses } from "../../Redux/Reducers/courseReducer";
 import { courseSelector } from "../../Redux/Selectors/selectors";
@@ -42,11 +43,12 @@ export default function HomeScreen() {
   return (
     <div>
       <Header />
-      {/* <Carousel /> */}
+      <Carousel />
       <h1 className="display-4">Danh sách khoá học</h1>
       <div className="container">
         <div className="row">{renderCourse(8)}</div>
       </div>
+      <Footer />
     </div>
   );
 }
