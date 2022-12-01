@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../../Components/Carousel";
 import CourseItem from "../../Components/CourseItems";
+import CourseRendering from "../../Components/CoursesRendering";
 import Footer from "../../Layouts/Footer";
 import Header from "../../Layouts/Header";
 import { getCourses } from "../../Redux/Reducers/courseReducer";
@@ -23,7 +24,7 @@ export default function HomeScreen() {
       });
   }, []);
 
-  const renderCourse = (courseQuantities) => {
+  const renderCourses = (courseQuantities) => {
     let courses = [];
     if (courseList.length) {
       for (let index = 0; index < courseQuantities; index++) {
@@ -31,23 +32,18 @@ export default function HomeScreen() {
       }
     }
 
-    return courses.map((course) => {
-      return (
-        <div className="col-3" key={course.maKhoaHoc}>
-          <CourseItem course={course} />
-        </div>
-      );
-    });
+    return <CourseRendering courseList={courses} />;
   };
 
   return (
     <div>
       <Header />
       <Carousel />
-      <h1 className="display-4">Danh sách khoá học</h1>
-      <div className="container">
-        <div className="row">{renderCourse(8)}</div>
-      </div>
+      <section className="content mt-4">
+        <h3 className="container text-left">Các khoá học mới nhất</h3>
+
+        {renderCourses(8)}
+      </section>
       <Footer />
     </div>
   );

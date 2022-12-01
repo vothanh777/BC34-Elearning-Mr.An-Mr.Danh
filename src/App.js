@@ -4,14 +4,19 @@ import HomeScreen from "./Screens/Home";
 import CourseDetail from "./Screens/Details";
 import SignUp from "./Screens/SignUp";
 import SignIn from "./Screens/SignIn";
+import { Route, Routes } from "react-router-dom";
+import CourseCategories from "./Screens/CourseCategories";
 
 function App() {
   return (
     <div className="App">
-      <HomeScreen />
-      {/* <CourseDetail /> */}
-      {/* <SignUp /> */}
-      {/* <SignIn /> */}
+      <Routes>
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/coursecategories" element={<CourseCategories />} />
+        <Route path="/coursedetail" element={<CourseDetail />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
     </div>
   );
 }

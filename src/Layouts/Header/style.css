@@ -10,6 +10,12 @@
 .courseSearch {
   width: 300px;
 }
+.dropdown-item {
+  color: white;
+}
+.dropdown-item:hover {
+  color: #343a40 !important;
+}
 
 @media (min-width: 1320px) {
   .courseSearch {

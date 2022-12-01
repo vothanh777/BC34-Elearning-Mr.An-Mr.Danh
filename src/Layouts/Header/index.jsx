@@ -1,15 +1,30 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useSearchParams } from "react-router-dom";
 import logo from "../../Assets/Images/cyberlogo-white.png";
+import { getCourseCategories } from "../../Redux/Reducers/courseReducer";
+import { courseSelector } from "../../Redux/Selectors/selectors";
+import { getCourseCategoriesApi } from "../../Services/course";
 import "./style.css";
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const courseCategories = useSelector(courseSelector).courseCategories;
+
+  useEffect(() => {
+    getCourseCategoriesApi()
+      .then((res) => dispatch(getCourseCategories(res.data)))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
   return (
     <header>
       <nav className="px-xl-5 navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand" href="#">
+        <NavLink className="navbar-brand" to="/">
           <img src={logo} alt="logo" style={{ height: 50 }} />
-        </a>
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -27,14 +42,33 @@ export default function Header() {
         >
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <NavLink className="nav-link" to="/">
                 Trang chủ <span className="sr-only">(current)</span>
-              </a>
+              </NavLink>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                aria-expanded="false"
+              >
                 Danh mục khoá học
               </a>
+              <div className="dropdown-menu bg-dark text-light p-0">
+                {courseCategories.map((category, index) => {
+                  return (
+                    <NavLink
+                      key={index}
+                      className="dropdown-item"
+                      to={`/courseCategories?maDanhMuc=${category.maDanhMuc}&maNhom=GP01`}
+                    >
+                      {category.tenDanhMuc}
+                    </NavLink>
+                  );
+                })}
+              </div>
             </li>
           </ul>
           <form className="my-2 my-lg-0">
@@ -45,12 +79,18 @@ export default function Header() {
             />
           </form>
           <div className="ml-xl-3">
-            <a className="btn btn-light btn-outline-primary my-2 my-sm-0 mx-1">
+            <NavLink
+              className="btn btn-light btn-outline-primary my-2 my-sm-0 mx-1"
+              to="/signin"
+            >
               Đăng nhập
-            </a>
-            <a className="btn btn-light btn-outline-primary my-2 my-sm-0">
+            </NavLink>
+            <NavLink
+              className="btn btn-light btn-outline-primary my-2 my-sm-0"
+              to="/signup"
+            >
               Đăng ký
-            </a>
+            </NavLink>
           </div>
         </div>
       </nav>

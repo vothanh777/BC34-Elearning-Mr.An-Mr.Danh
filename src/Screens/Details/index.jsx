@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Header from "../../Layouts/Header";
 import { getCourseDetail } from "../../Redux/Reducers/courseReducer";
 import { courseSelector } from "../../Redux/Selectors/selectors";
 import { getCourseDetailApi } from "../../Services/course";
@@ -18,9 +19,10 @@ export default function CourseDetail() {
   }, []);
 
   return (
-    <div>
+    <>
+      <Header />
       <img src={courseDetail.hinhAnh} alt="" />
       <h3>{courseDetail.tenKhoaHoc}</h3>
-    </div>
+    </>
   );
 }

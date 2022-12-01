@@ -3,9 +3,12 @@ import logo from "../../Assets/Images/cyberlogo-white.png";
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white text-left px-5 py-3">
+    <footer
+      className="bg-dark text-white text-left px-lg-5 py-3"
+      style={{ overflow: "hidden" }}
+    >
       <div className="row m-0">
-        <div className="col-4">
+        <div className="col-lg-4 col-md-6">
           <img src={logo} alt="" height={50} />
           <p className="pb-3">
             Cybersoft Academy - Hệ thống đào tạo lập trình chuyên sâu theo dự án
@@ -45,7 +48,7 @@ export default function Footer() {
             <i className="fa fa-phone mr-2"></i> 0123456789
           </p>
         </div>
-        <div className="col-4">
+        <div className="col-lg-4 col-md-6">
           <h6>ĐĂNG KÝ TƯ VẤN</h6>
           <form>
             <input
@@ -76,7 +79,7 @@ export default function Footer() {
             consequuntur minus.
           </p>
         </div>
-        <div className="col-4 text-center">
+        <div className="col-lg-4 col-md-12 text-center">
           <div
             className="fb-page fb_iframe_widget w-100"
             data-href="https://www.facebook.com/lophocviet/"
@@ -122,16 +125,15 @@ export default function Footer() {
           </h5>
         </div>
         <div
+          className="mx-3 w-100 my-2"
           style={{
             borderTop: "3px solid white",
-            margin: "10px 0",
-            width: "100%",
           }}
         ></div>
-        <p className="text-center">
-          <i class="fa fa-copyright" aria-hidden="true"></i> Copyright
-        </p>
       </div>
+      <p className="text-center m-0">
+        <i class="fa fa-copyright" aria-hidden="true"></i> Copyright
+      </p>
     </footer>
   );
 }
