@@ -132,7 +132,7 @@ export default function Footer() {
         ></div>
       </div>
       <p className="text-center m-0">
-        <i class="fa fa-copyright" aria-hidden="true"></i> Copyright
+        <i className="fa fa-copyright" aria-hidden="true"></i> Copyright
       </p>
     </footer>
   );

@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import logo from "../../Assets/Images/cyberlogo-white.png";
 import { getCourseCategories } from "../../Redux/Reducers/courseReducer";
 import { courseSelector } from "../../Redux/Selectors/selectors";
 import { getCourseCategoriesApi } from "../../Services/course";
 import "./style.css";
+import { Formik, Form, Field } from "formik";
+import { GROUP_ID } from "../../Ultis/constants";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -17,7 +19,11 @@ export default function Header() {
       .catch((err) => console.log(err));
   }, []);
 
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  let keyword = searchParams.has("tenkhoahoc")
+    ? searchParams.get("tenkhoahoc")
+    : "";
 
   return (
     <header>
@@ -62,7 +68,7 @@ export default function Header() {
                     <NavLink
                       key={index}
                       className="dropdown-item"
-                      to={`/courseCategories?maDanhMuc=${category.maDanhMuc}&maNhom=GP01`}
+                      to={`/courseCategories?maDanhMuc=${category.maDanhMuc}&maNhom=${GROUP_ID}`}
                     >
                       {category.tenDanhMuc}
                     </NavLink>
@@ -71,13 +77,29 @@ export default function Header() {
               </div>
             </li>
           </ul>
-          <form className="my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2 courseSearch"
-              type="search"
-              placeholder="Tìm khoá học"
-            />
-          </form>
+          <Formik
+            initialValues={{ searchText: keyword }}
+            onSubmit={({ searchText }) => {
+              navigate(`/coursesearch?tenkhoahoc=${searchText}`);
+            }}
+          >
+            {(props) => (
+              <Form className="my-2 my-lg-0">
+                <Field
+                  className="form-control mr-sm-2 courseSearch"
+                  type="search"
+                  placeholder="Tìm khoá học"
+                  name="searchText"
+                  value={props.values.searchText}
+                  onChange={(e) => {
+                    console.log("onchange:", e.currentTarget.value);
+                    props.handleChange(e);
+                  }}
+                />
+              </Form>
+            )}
+          </Formik>
+
           <div className="ml-xl-3">
             <NavLink
               className="btn btn-light btn-outline-primary my-2 my-sm-0 mx-1"

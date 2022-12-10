@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { signUpApi, signUpUserSchema } from "../../Services/user";
 import Header from "../../Layouts/Header";
+import { GROUP_ID } from "../../Ultis/constants";
 
 export default function SignUp() {
   return (
@@ -15,7 +16,7 @@ export default function SignUp() {
             matKhau: "",
             hoTen: "",
             soDT: "",
-            maNhom: "GP01",
+            maNhom: GROUP_ID,
             email: "",
           }}
           validationSchema={signUpUserSchema}
