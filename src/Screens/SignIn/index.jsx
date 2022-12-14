@@ -1,14 +1,15 @@
 import { Form, Formik, Field } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Header from "../../Layouts/Header";
 import { signIn } from "../../Redux/Reducers/userReducer";
-import { userSelector } from "../../Redux/Selectors/selectors";
 import { signInApi } from "../../Services/user";
+import { saveLocal } from "../../Ultis/config";
 
 export default function SignIn() {
   const dispatch = useDispatch();
-  const userCredentials = useSelector(userSelector).userCredentials;
+  const navigate = useNavigate();
 
   return (
     <>
@@ -22,7 +23,8 @@ export default function SignIn() {
           signInApi(values)
             .then((res) => {
               dispatch(signIn(res.data));
-              localStorage.setItem("userCredentials", JSON.stringify(res.data));
+              saveLocal("userCredentials", res.data);
+              navigate("/");
             })
             .catch((err) => console.log(err));
         }}

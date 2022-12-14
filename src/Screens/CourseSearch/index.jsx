@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import Footer from "../../Layouts/Footer";
 import Header from "../../Layouts/Header";
 import { getCoursesBySearchApi } from "../../Services/course";
@@ -20,8 +20,6 @@ export default function CourseSearch() {
       .then((res) => setSearchCourseList(res.data))
       .catch((err) => console.log(err));
   }, [keyword]);
-
-  console.log(searchCourseList);
 
   return (
     <>
@@ -45,13 +43,25 @@ export default function CourseSearch() {
                 <div className="row">
                   <div className="col-3">
                     <img
-                      style={{ width: "100%", height: 150 }}
+                      style={{ height: 150 }}
                       src={course.hinhAnh}
-                      alt={course.hinhAnh}
+                      alt=""
+                      className="img-fluid"
                     />
                   </div>
                   <div className="col-9">
-                    <h1>{course.tenKhoaHoc}</h1>
+                    <h1>
+                      <NavLink
+                        style={{
+                          textDecoration: "none",
+                          color: "black",
+                          cursor: "pointer",
+                        }}
+                        to={`/coursedetail/${course.maKhoaHoc}`}
+                      >
+                        {course.tenKhoaHoc}
+                      </NavLink>
+                    </h1>
                     <p>{course.moTa}</p>
                     <div className="text-right">
                       {course.soLuongHocVien} học viên

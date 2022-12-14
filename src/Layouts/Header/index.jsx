@@ -3,14 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import logo from "../../Assets/Images/cyberlogo-white.png";
 import { getCourseCategories } from "../../Redux/Reducers/courseReducer";
-import { courseSelector } from "../../Redux/Selectors/selectors";
+import { signIn } from "../../Redux/Reducers/userReducer";
+import { courseSelector, userSelector } from "../../Redux/Selectors/selectors";
 import { getCourseCategoriesApi } from "../../Services/course";
 import "./style.css";
 import { Formik, Form, Field } from "formik";
 import { GROUP_ID } from "../../Ultis/constants";
+import { getLocal, removeLocal } from "../../Ultis/config";
+import { useState } from "react";
 
-export default function Header() {
+export default function Header(props) {
   const dispatch = useDispatch();
+  const [userCredentials, setUserCredentials] = useState(
+    useSelector(userSelector).userCredentials
+  );
+
+  console.log(userCredentials);
+
   const courseCategories = useSelector(courseSelector).courseCategories;
 
   useEffect(() => {
@@ -62,12 +71,16 @@ export default function Header() {
               >
                 Danh mục khoá học
               </a>
-              <div className="dropdown-menu bg-dark text-light p-0">
+              <div className="dropdown-menu p-0">
                 {courseCategories.map((category, index) => {
                   return (
                     <NavLink
                       key={index}
-                      className="dropdown-item"
+                      className={
+                        props.categoryId == category.maDanhMuc
+                          ? "dropdown-item bg-primary"
+                          : "dropdown-item"
+                      }
                       to={`/courseCategories?maDanhMuc=${category.maDanhMuc}&maNhom=${GROUP_ID}`}
                     >
                       {category.tenDanhMuc}
@@ -92,7 +105,6 @@ export default function Header() {
                   name="searchText"
                   value={props.values.searchText}
                   onChange={(e) => {
-                    console.log("onchange:", e.currentTarget.value);
                     props.handleChange(e);
                   }}
                 />
@@ -101,18 +113,44 @@ export default function Header() {
           </Formik>
 
           <div className="ml-xl-3">
-            <NavLink
-              className="btn btn-light btn-outline-primary my-2 my-sm-0 mx-1"
-              to="/signin"
-            >
-              Đăng nhập
-            </NavLink>
-            <NavLink
-              className="btn btn-light btn-outline-primary my-2 my-sm-0"
-              to="/signup"
-            >
-              Đăng ký
-            </NavLink>
+            {userCredentials ? (
+              <div
+                className="text-light dropdown"
+                style={{ cursor: "pointer" }}
+              >
+                <a className="dropdown-toggle" data-toggle="dropdown">
+                  <i className="fa fa-user-circle mr-2 h3"></i>
+                  <span className="h6">{userCredentials.hoTen}</span>
+                </a>
+                <div className="dropdown-menu p-0">
+                  <a
+                    className="dropdown-item bg-light"
+                    onClick={() => {
+                      removeLocal("userCredentials");
+                      dispatch(signIn(null));
+                      setUserCredentials(null);
+                    }}
+                  >
+                    Sign out
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <>
+                <NavLink
+                  className="btn btn-light btn-outline-primary my-2 my-sm-0 mx-1"
+                  to="/signin"
+                >
+                  Đăng nhập
+                </NavLink>
+                <NavLink
+                  className="btn btn-light btn-outline-primary my-2 my-sm-0"
+                  to="/signup"
+                >
+                  Đăng ký
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
       </nav>

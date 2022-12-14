@@ -4,7 +4,7 @@ import CourseItem from "../CourseItems";
 export default function CourseRendering(props) {
   const courseList = props.courseList;
   return (
-    <div className="container mt-3">
+    <div className="container pt-3" style={{ backgroundColor: "#f8f9fa" }}>
       <div className="row">
         {courseList.map((course) => {
           return (

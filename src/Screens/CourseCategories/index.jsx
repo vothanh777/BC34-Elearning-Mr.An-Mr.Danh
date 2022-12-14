@@ -6,6 +6,7 @@ import Header from "../../Layouts/Header";
 import { getCoursesByCategoryApi } from "../../Services/course";
 
 export default function CourseCategories() {
+  // remove BS4 active class
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryId = searchParams.get("maDanhMuc");
   const groupId = searchParams.get("maNhom");
@@ -25,7 +26,7 @@ export default function CourseCategories() {
 
   return (
     <>
-      <Header />
+      <Header categoryId={categoryId} />
       <section className="content">
         <h1 className="text-left bg-success">
           <p className="container text-light py-3">{categoryName}</p>

@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { signUpApi, signUpUserSchema } from "../../Services/user";
 import Header from "../../Layouts/Header";
 import { GROUP_ID } from "../../Ultis/constants";
+import Footer from "../../Layouts/Footer";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   return (
     <>
       <Header />
-      <div className="w-50 mx-auto mt-3">
+      <div className="w-50 mx-auto my-3">
         <h1>Đăng ký</h1>
         <Formik
           initialValues={{
@@ -22,7 +25,7 @@ export default function SignUp() {
           validationSchema={signUpUserSchema}
           onSubmit={(value) => {
             signUpApi(value)
-              .then((res) => console.log(res))
+              .then(() => navigate("/signin"))
               .catch((err) => console.log(err));
           }}
         >
@@ -115,6 +118,7 @@ export default function SignUp() {
           )}
         </Formik>
       </div>
+      <Footer />
     </>
   );
 }

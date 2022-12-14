@@ -1,0 +1,26 @@
+.title {
+  height: 60vh;
+  position: relative;
+}
+
+.title img,
+.title .titleContent {
+  width: 100%;
+  height: 100%;
+}
+
+.title .titleContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 80px;
+  padding-left: 200px;
+  color: #fff;
+}
+.titleContent .ratings {
+  pointer-events: none;
+}
+.titleContent button {
+  background-color: rgba(0, 0, 0, 0.2);
+}
