@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { getLocal } from "./Ultis/config";
 import { signIn } from "./Redux/Reducers/userReducer";
 import { useEffect } from "react";
+import Header from "./Layouts/Header";
 
 function App() {
   //check user login

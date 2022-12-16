@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
+import "./style.css";
 
 export default function CourseItem(props) {
   const { maKhoaHoc, tenKhoaHoc, hinhAnh, luotXem } = props.course;
@@ -10,7 +11,7 @@ export default function CourseItem(props) {
   const navigate = useNavigate();
 
   return (
-    <div className="card p-2 mb-4">
+    <div className="card mb-3">
       <img src={hinhAnh} alt="" style={{ width: "100%", height: 150 }} />
       <p className="lead font-weight-bold">{tenKhoaHoc}</p>
       <p className="lead" style={{ fontSize: "1rem" }}>

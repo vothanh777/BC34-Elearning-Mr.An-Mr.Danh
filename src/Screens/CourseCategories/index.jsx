@@ -6,7 +6,6 @@ import Header from "../../Layouts/Header";
 import { getCoursesByCategoryApi } from "../../Services/course";
 
 export default function CourseCategories() {
-  // remove BS4 active class
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryId = searchParams.get("maDanhMuc");
   const groupId = searchParams.get("maNhom");

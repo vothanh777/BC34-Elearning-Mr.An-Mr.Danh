@@ -14,10 +14,14 @@ import { useState } from "react";
 
 export default function Header(props) {
   const dispatch = useDispatch();
-  const [userCredentials, setUserCredentials] = useState(
-    useSelector(userSelector).userCredentials
-  );
+  const [userCredentials, setUserCredentials] = useState(null);
 
+  const userLogin = useSelector(userSelector).userCredentials;
+  useEffect(() => {
+    if (userLogin) {
+      setUserCredentials(userLogin);
+    }
+  }, [userLogin]);
   console.log(userCredentials);
 
   const courseCategories = useSelector(courseSelector).courseCategories;
