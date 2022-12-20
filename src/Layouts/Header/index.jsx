@@ -22,7 +22,6 @@ export default function Header(props) {
       setUserCredentials(userLogin);
     }
   }, [userLogin]);
-  console.log(userCredentials);
 
   const courseCategories = useSelector(courseSelector).courseCategories;
 

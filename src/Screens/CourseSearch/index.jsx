@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Footer from "../../Layouts/Footer";
 import Header from "../../Layouts/Header";
 import { getCoursesBySearchPaginationApi } from "../../Services/course";
+import { _paginate } from "../../Services/pagination";
 import { GROUP_ID } from "../../Ultis/constants";
-import Pagination from "../../Components/Pagination";
 
 export default function CourseSearch() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,10 +23,11 @@ export default function CourseSearch() {
 
   const [searchCourseList, setSearchCourseList] = useState([]);
 
-  const getCoursesBySearchPagination = (page = currentPage) => {
+  const getCoursesBySearchPagination = (page) => {
     return getCoursesBySearchPaginationApi(keyword, GROUP_ID, page, pageSize);
   };
 
+  //pagination
   const getCoursePageChange = (page) => {
     getCoursesBySearchPagination(page)
       .then((res) => setSearchCourseList(res.data.items))
@@ -35,70 +35,33 @@ export default function CourseSearch() {
   };
 
   useEffect(() => {
-    getCoursesBySearchPagination()
+    getCoursesBySearchPagination(1)
       .then((res) => {
         setSearchCourseList(res.data.items);
         setTotalCount(res.data.totalCount);
-        setTotalPages(res.data.totalPages);
+        setTotalPages(Math.ceil(res.data.totalCount / pageSize));
+        setCurrentPage(1);
+        setCount(1);
       })
       .catch((err) => {
         console.log(err);
         setSearchCourseList([]);
+        setCurrentPage(1);
         setTotalCount(0);
+        setCount(1);
       });
   }, [keyword]);
 
   //pagination
-  const prevPage = () => {
-    const currentPg = currentPage === 1 ? 1 : currentPage - 1;
-    getCoursePageChange(currentPg);
-    setCurrentPage(currentPg);
-
-    const _count = pageSize * (currentPg - 1) + 1;
-    setCount(_count);
-  };
-
-  const nextPage = () => {
-    const currentPg = currentPage < totalPages ? currentPage + 1 : currentPage;
-    getCoursePageChange(currentPg);
-    setCurrentPage(currentPg);
-
-    const _count = pageSize * (currentPg - 1) + 1;
-    setCount(_count);
-  };
-
-  const renderPagination = () => {
-    return (
-      <div
-        className="text-right"
-        style={{ display: totalCount === 0 ? "none" : "block" }}
-      >
-        <span className="text-info">
-          {count}-
-          {count + pageSize - 1 > totalCount
-            ? totalCount
-            : count + pageSize - 1}{" "}
-          trong số {totalCount}
-        </span>
-        <button
-          onClick={prevPage}
-          className="btn btn-light text-dark"
-          style={{ borderRadius: "50%" }}
-          disabled={currentPage === 1 ? "disabled" : ""}
-        >
-          <i className="fa fa-angle-left"></i>
-        </button>
-        <button
-          onClick={nextPage}
-          className="btn btn-light text-dark"
-          style={{ borderRadius: "50%" }}
-          disabled={currentPage === totalPages ? "disabled" : ""}
-        >
-          <i className="fa fa-angle-right"></i>
-        </button>
-      </div>
+  const paginate = () =>
+    _paginate(
+      [count, setCount],
+      totalCount,
+      pageSize,
+      totalPages,
+      [currentPage, setCurrentPage],
+      getCoursePageChange
     );
-  };
 
   return (
     <>
@@ -108,7 +71,7 @@ export default function CourseSearch() {
           Tìm thấy <span className="text-info">{totalCount}</span> khoá học{" "}
           <span className="text-info">"{keyword}"</span>
         </h3>
-        {renderPagination()}
+        {paginate()}
         <div className="row">
           {searchCourseList.map((course, index) => {
             return (
@@ -152,7 +115,7 @@ export default function CourseSearch() {
             );
           })}
         </div>
-        {renderPagination()}
+        {paginate()}
       </section>
       <Footer />
     </>
