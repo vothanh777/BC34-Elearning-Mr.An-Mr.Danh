@@ -1,4 +1,4 @@
-.nav-link {
+.navbar-nav .nav-link {
   color: white !important;
 }
 .btn-light {
@@ -10,10 +10,15 @@
 .courseSearch {
   width: 300px;
 }
+.dropdown-menu {
+  overflow: hidden;
+}
 .dropdown-item,
 .dropdown-item.active {
   color: white;
   background-color: #343a40;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .dropdown-item:hover,
 .dropdown-item.active:hover {
@@ -21,6 +26,23 @@
   background-color: #fff !important;
 }
 
+.dropdown-item.userInfo {
+  color: #343a40;
+}
+
+.user a.dropdown-toggle {
+  text-decoration: none;
+  color: #fff;
+}
+.user a.dropdown-toggle:hover {
+  color: #dae0e5;
+}
+
+@media (max-width: 1200px) {
+  .user {
+    padding-right: 10px;
+  }
+}
 @media (min-width: 1320px) {
   .courseSearch {
     width: 400px;

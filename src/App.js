@@ -12,6 +12,7 @@ import { getLocal } from "./Ultis/config";
 import { signIn } from "./Redux/Reducers/userReducer";
 import { useEffect } from "react";
 import Header from "./Layouts/Header";
+import UserInfo from "./Screens/UserInfo";
 
 function App() {
   //check user login
@@ -31,6 +32,7 @@ function App() {
         <Route path="/coursesearch" element={<CourseSearch />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/userinfo" element={<UserInfo />} />
       </Routes>
     </div>
   );

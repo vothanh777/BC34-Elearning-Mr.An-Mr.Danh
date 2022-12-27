@@ -29,7 +29,7 @@ export default function SignIn() {
             .catch((err) => console.log(err));
         }}
       >
-        {({ handleChange }) => (
+        {({ handleChange, submitForm }) => (
           <Form className="w-50 mx-auto mt-3 text-left">
             <h1 className="text-center">Đăng nhập</h1>
             <div className="form-group">
@@ -51,7 +51,14 @@ export default function SignIn() {
               />
             </div>
             <div className="text-center">
-              <button className="btn btn-success">Đăng nhập</button>
+              <button
+                className="btn btn-success"
+                onClick={() => {
+                  submitForm();
+                }}
+              >
+                Đăng nhập
+              </button>
             </div>
           </Form>
         )}

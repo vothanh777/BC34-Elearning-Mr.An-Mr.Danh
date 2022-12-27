@@ -115,7 +115,7 @@ export default function Header(props) {
             )}
           </Formik>
 
-          <div className="ml-xl-3">
+          <div className="user ml-xl-2 text-left">
             {userCredentials ? (
               <div
                 className="text-light dropdown"
@@ -126,8 +126,14 @@ export default function Header(props) {
                   <span className="h6">{userCredentials.hoTen}</span>
                 </a>
                 <div className="dropdown-menu p-0">
+                  <NavLink
+                    className="dropdown-item bg-light userInfo"
+                    to="/userinfo"
+                  >
+                    Thông tin tài khoản
+                  </NavLink>
                   <a
-                    className="dropdown-item bg-light"
+                    className="dropdown-item bg-light userInfo"
                     onClick={() => {
                       removeLocal("userCredentials");
                       dispatch(signIn(null));
