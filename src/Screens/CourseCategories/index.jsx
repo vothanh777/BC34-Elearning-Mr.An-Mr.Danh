@@ -38,7 +38,7 @@ export default function CourseCategories() {
   const getCoursePageChange = (page) => {
     getCouseListAPage(page, courseListByCategory);
   };
-  //pagination
+
   const paginate = () =>
     _paginate(
       [count, setCount],
@@ -48,12 +48,14 @@ export default function CourseCategories() {
       [currentPage, setCurrentPage],
       getCoursePageChange
     );
+  // end pagination
 
   useEffect(() => {
     getCoursesByCategoryApi(categoryId, groupId)
       .then((res) => {
         setCategoryName(res.data[0].danhMucKhoaHoc.tenDanhMucKhoaHoc);
         setCourseListByCategory(res.data);
+        //pagination
         getCouseListAPage(1, res.data);
         setTotalCount(res.data.length);
         setTotalPages(Math.ceil(res.data.length / pageSize));
@@ -61,10 +63,11 @@ export default function CourseCategories() {
         setCount(1);
       })
       .catch((err) => {
+        console.log(err);
+        //pagination
         setCurrentPage(1);
         setTotalCount(0);
         setCount(1);
-        console.log(err);
       });
   }, [categoryId, groupId]);
 

@@ -3,6 +3,7 @@ import CourseItem from "../CourseItems";
 
 export default function CourseRendering(props) {
   const courseList = props.courseList;
+
   return (
     <div className="container pt-2" style={{ backgroundColor: "#f8f9fa" }}>
       <div className="row">

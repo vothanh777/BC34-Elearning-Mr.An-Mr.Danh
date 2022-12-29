@@ -9,6 +9,7 @@ import { getCourseDetail } from "../../Redux/Reducers/courseReducer";
 import { courseSelector } from "../../Redux/Selectors/selectors";
 import { getCourseDetailApi } from "../../Services/course";
 import { Rating } from "react-simple-star-rating";
+import RegisterButton from "../../Components/RegisterButton";
 
 export default function CourseDetail() {
   const { courseId } = useParams();
@@ -38,7 +39,7 @@ export default function CourseDetail() {
               Đánh giá khoá học
               <Rating initialValue={rating} />
             </p>
-            <button className="btn btn-success">ĐĂNG KÝ</button>
+            <RegisterButton maKhoaHoc={courseId} />
           </div>
         </div>
 

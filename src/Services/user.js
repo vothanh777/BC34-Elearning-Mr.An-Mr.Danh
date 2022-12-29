@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as yup from "yup";
+import { CYBERSOFT_TOKEN } from "../Ultis/constants";
 
 export const signUpUserSchema = yup.object().shape({
   taiKhoan: yup.string().required("Vui lòng nhập tài khoản!"),
@@ -21,8 +22,7 @@ export const signUpApi = (user) => {
     url: "https://elearningnew.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy",
     data: user,
     headers: {
-      TokenCybersoft:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzNCIsIkhldEhhblN0cmluZyI6IjI3LzA0LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY4MjU1MzYwMDAwMCIsIm5iZiI6MTY1MzU4NDQwMCwiZXhwIjoxNjgyNzAxMjAwfQ.WXYIKeb4x0tXpYflgrnKFbivOnuUdLmKcgl7Xr0MD3I",
+      TokenCybersoft: CYBERSOFT_TOKEN,
     },
   });
 };
@@ -33,8 +33,7 @@ export const signInApi = (user) => {
     url: "https://elearningnew.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
     data: user,
     headers: {
-      TokenCybersoft:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzNCIsIkhldEhhblN0cmluZyI6IjI3LzA0LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY4MjU1MzYwMDAwMCIsIm5iZiI6MTY1MzU4NDQwMCwiZXhwIjoxNjgyNzAxMjAwfQ.WXYIKeb4x0tXpYflgrnKFbivOnuUdLmKcgl7Xr0MD3I",
+      TokenCybersoft: CYBERSOFT_TOKEN,
     },
   });
 };
@@ -46,8 +45,7 @@ export const getAccountInfoApi = (user) => {
     data: user.taiKhoan,
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
-      TokenCybersoft:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzNCIsIkhldEhhblN0cmluZyI6IjI3LzA0LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY4MjU1MzYwMDAwMCIsIm5iZiI6MTY1MzU4NDQwMCwiZXhwIjoxNjgyNzAxMjAwfQ.WXYIKeb4x0tXpYflgrnKFbivOnuUdLmKcgl7Xr0MD3I",
+      TokenCybersoft: CYBERSOFT_TOKEN,
     },
   });
 };
@@ -59,8 +57,7 @@ export const updateUserInfoApi = (user) => {
     data: user.info,
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
-      TokenCybersoft:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzNCIsIkhldEhhblN0cmluZyI6IjI3LzA0LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY4MjU1MzYwMDAwMCIsIm5iZiI6MTY1MzU4NDQwMCwiZXhwIjoxNjgyNzAxMjAwfQ.WXYIKeb4x0tXpYflgrnKFbivOnuUdLmKcgl7Xr0MD3I",
+      TokenCybersoft: CYBERSOFT_TOKEN,
     },
   });
 };

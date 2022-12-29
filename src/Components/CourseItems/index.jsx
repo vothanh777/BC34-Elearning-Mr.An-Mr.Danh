@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
+import RegisterButton from "../RegisterButton";
 import "./style.css";
 
 export default function CourseItem(props) {
@@ -17,12 +18,37 @@ export default function CourseItem(props) {
       <p className="lead" style={{ fontSize: "1rem" }}>
         <Rating initialValue={rating} /> ({luotXem})
       </p>
-      <button
-        className="btn btn-success"
-        onClick={() => navigate(`/coursedetail/${maKhoaHoc}`)}
-      >
-        XEM CHI TIẾT
-      </button>
+      <p>
+        <button
+          className="btn btn-info mr-2"
+          onClick={() => navigate(`/coursedetail/${maKhoaHoc}`)}
+        >
+          Xem chi tiết
+        </button>
+        <RegisterButton navigate={navigate} maKhoaHoc={maKhoaHoc} />
+        {/* <button
+          className="btn btn-success"
+          onClick={() => {
+            const registerInfo = {
+              accessToken: userCredentials.accessToken,
+              info: {
+                maKhoaHoc,
+                taiKhoan: userCredentials.taiKhoan,
+              },
+            };
+
+            registerCourseApi(registerInfo)
+              .then((res) => console.log(res))
+              .catch((err) => {
+                alert(err.response.data);
+              });
+
+            navigate(`/coursedetail/${maKhoaHoc}`);
+          }}
+        >
+          Đăng ký
+        </button> */}
+      </p>
     </div>
   );
 }
