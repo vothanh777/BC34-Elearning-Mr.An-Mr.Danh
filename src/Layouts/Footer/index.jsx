@@ -4,7 +4,7 @@ import logo from "../../Assets/Images/cyberlogo-white.png";
 export default function Footer() {
   return (
     <footer
-      className="bg-dark text-white text-left px-lg-5 py-3"
+      className="bg-dark text-white text-left px-lg-5 py-3 mt-3"
       style={{ overflow: "hidden" }}
     >
       <div className="row m-0">

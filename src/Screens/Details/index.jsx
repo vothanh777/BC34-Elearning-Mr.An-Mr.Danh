@@ -3,8 +3,6 @@ import "./style.css";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Footer from "../../Layouts/Footer";
-import Header from "../../Layouts/Header";
 import { getCourseDetail } from "../../Redux/Reducers/courseReducer";
 import { courseSelector } from "../../Redux/Selectors/selectors";
 import { getCourseDetailApi } from "../../Services/course";
@@ -22,14 +20,16 @@ export default function CourseDetail() {
       .then((res) => {
         dispatch(getCourseDetail(res.data));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data);
+      });
   }, [courseId]);
 
   const [rating, setRating] = useState(4);
 
   return (
     <>
-      <Header />
       <section className="text-left">
         <div className="title">
           <img src={courseDetail.hinhAnh} alt={courseDetail.tenKhoaHoc} />
@@ -74,7 +74,6 @@ export default function CourseDetail() {
           </p>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

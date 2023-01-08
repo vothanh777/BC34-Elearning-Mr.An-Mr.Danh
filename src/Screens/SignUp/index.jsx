@@ -1,16 +1,13 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { signUpApi, signUpUserSchema } from "../../Services/user";
-import Header from "../../Layouts/Header";
 import { GROUP_ID } from "../../Ultis/constants";
-import Footer from "../../Layouts/Footer";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const navigate = useNavigate();
   return (
     <>
-      <Header />
       <div className="w-50 mx-auto my-3">
         <h1>Đăng ký</h1>
         <Formik
@@ -26,7 +23,10 @@ export default function SignUp() {
           onSubmit={(value) => {
             signUpApi(value)
               .then(() => navigate("/signin"))
-              .catch((err) => console.log(err));
+              .catch((err) => {
+                console.log(err);
+                alert(err.response.data);
+              });
           }}
         >
           {(props) => (
@@ -118,7 +118,6 @@ export default function SignUp() {
           )}
         </Formik>
       </div>
-      <Footer />
     </>
   );
 }

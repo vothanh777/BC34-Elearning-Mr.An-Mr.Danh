@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import CoursesListing from "../../Components/CoursesListing";
-import Footer from "../../Layouts/Footer";
-import Header from "../../Layouts/Header";
 import { getCoursesBySearchPaginationApi } from "../../Services/course";
 import { _paginate } from "../../Services/pagination";
 import { GROUP_ID } from "../../Ultis/constants";
@@ -66,7 +64,6 @@ export default function CourseSearch() {
 
   return (
     <>
-      <Header />
       <section className="container text-left my-3">
         <h3 className="my-3">
           Tìm thấy <span className="text-info">{totalCount}</span> khoá học{" "}
@@ -76,7 +73,6 @@ export default function CourseSearch() {
         <CoursesListing courseList={searchCourseList} />
         {paginate()}
       </section>
-      <Footer />
     </>
   );
 }

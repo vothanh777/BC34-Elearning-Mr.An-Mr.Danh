@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import Footer from "../../Layouts/Footer";
-import Header from "../../Layouts/Header";
 import { userSelector } from "../../Redux/Selectors/selectors";
 import { getAccountInfoApi, updateUserInfoApi } from "../../Services/user";
 import { getLocal } from "../../Ultis/config";
 import { Formik, Form, Field } from "formik";
 import CoursesListing from "../../Components/CoursesListing";
 import { _paginate } from "../../Services/pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { getMyCourses } from "../../Redux/Reducers/userReducer";
 
 let registeredCourses = [];
 const isCancel = true;
 export default function UserInfo() {
+  useEffect(() => {
+    document.getElementById("myCoursesNav").classList.remove("active");
+    document.getElementById("myInfo").classList.add("active");
+  }, []);
+  const dispatch = useDispatch();
+
   const userCredentials = getLocal("userCredentials");
   const [userInfo, setUserInfo] = useState({});
   const [eye, setEye] = useState(false);
@@ -20,6 +26,7 @@ export default function UserInfo() {
 
   //myCourses
   const [myCourses, setMyCourses] = useState([]);
+  const myArr = useSelector(userSelector).myCourses;
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,6 +68,9 @@ export default function UserInfo() {
       .then((res) => {
         setUserInfo(res.data);
         setMyCourses(res.data.chiTietKhoaHocGhiDanh);
+        //dispatch myCourses to reducer
+        dispatch(getMyCourses(res.data.chiTietKhoaHocGhiDanh));
+
         registeredCourses = [...res.data.chiTietKhoaHocGhiDanh];
 
         //pagination
@@ -79,10 +89,7 @@ export default function UserInfo() {
         setTotalCount(0);
         setCount(1);
       });
-
-    document.getElementById("myCoursesNav").classList.remove("active");
-    document.getElementById("myInfo").classList.add("active");
-  }, [userCredentials.taiKhoan]);
+  }, [userCredentials.taiKhoan, myArr.length]);
 
   const switchActive = (idOn, idOff) => {
     if (!document.getElementById(idOn).classList.contains("active")) {
@@ -103,7 +110,6 @@ export default function UserInfo() {
 
   return (
     <>
-      <Header />
       <section
         className="container"
         style={{
@@ -327,12 +333,7 @@ export default function UserInfo() {
           <div className="tab-pane container fade" id="myCourses">
             <h3>Các khoá học đã ghi danh</h3>
             <p style={{ maxWidth: "30%", marginLeft: "auto" }}>
-              <Formik
-                initialValues={{ searchText: "" }}
-                onSubmit={({ searchText }) => {
-                  //code
-                }}
-              >
+              <Formik initialValues={{ searchText: "" }}>
                 {({ values, handleChange }) => (
                   <Form>
                     <Field
@@ -380,7 +381,6 @@ export default function UserInfo() {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

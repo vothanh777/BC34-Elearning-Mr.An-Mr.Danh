@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   userCredentials: null,
+  myCourses: [],
 };
 
 const userReducer = createSlice({
@@ -11,9 +12,17 @@ const userReducer = createSlice({
     signIn: (state, { payload }) => {
       state.userCredentials = payload;
     },
+    getMyCourses: (state, { payload }) => {
+      state.myCourses = [...payload];
+    },
+    removeCourse: (state, { payload }) => {
+      state.myCourses = state.myCourses.filter(
+        (course) => course.maKhoaHoc === payload
+      );
+    },
   },
 });
 
-export const { signIn } = userReducer.actions;
+export const { signIn, getMyCourses, removeCourse } = userReducer.actions;
 
 export default userReducer.reducer;

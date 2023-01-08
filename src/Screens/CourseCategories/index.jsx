@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import CourseRendering from "../../Components/CoursesRendering";
-import Footer from "../../Layouts/Footer";
-import Header from "../../Layouts/Header";
 import { getCoursesByCategoryApi } from "../../Services/course";
 import { _paginate } from "../../Services/pagination";
 
@@ -73,7 +71,6 @@ export default function CourseCategories() {
 
   return (
     <>
-      <Header categoryId={categoryId} />
       <section className="content">
         <h1 className="text-left bg-success">
           <p className="container text-light py-3">{categoryName}</p>
@@ -89,7 +86,6 @@ export default function CourseCategories() {
           ""
         )}
       </section>
-      <Footer />
     </>
   );
 }

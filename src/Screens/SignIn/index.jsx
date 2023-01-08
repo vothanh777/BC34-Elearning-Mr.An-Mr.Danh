@@ -2,7 +2,6 @@ import { Form, Formik, Field } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Header from "../../Layouts/Header";
 import { signIn } from "../../Redux/Reducers/userReducer";
 import { signInApi } from "../../Services/user";
 import { saveLocal } from "../../Ultis/config";
@@ -13,7 +12,6 @@ export default function SignIn() {
 
   return (
     <>
-      <Header />
       <Formik
         initialValues={{
           taiKhoan: "",
@@ -26,10 +24,13 @@ export default function SignIn() {
               saveLocal("userCredentials", res.data);
               navigate("/");
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+              console.log(err);
+              alert(err.response.data);
+            });
         }}
       >
-        {({ handleChange, submitForm }) => (
+        {({ handleChange }) => (
           <Form className="w-50 mx-auto mt-3 text-left">
             <h1 className="text-center">Đăng nhập</h1>
             <div className="form-group">
@@ -51,14 +52,7 @@ export default function SignIn() {
               />
             </div>
             <div className="text-center">
-              <button
-                className="btn btn-success"
-                onClick={() => {
-                  submitForm();
-                }}
-              >
-                Đăng nhập
-              </button>
+              <button className="btn btn-success">Đăng nhập</button>
             </div>
           </Form>
         )}

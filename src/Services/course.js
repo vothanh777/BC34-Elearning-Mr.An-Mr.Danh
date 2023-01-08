@@ -89,3 +89,27 @@ export const removeRegisteredCourseApi = (registerInfo) => {
     },
   });
 };
+
+export const registerCourseForUserApi = (registerInfo) => {
+  return axios({
+    method: "POST",
+    url: "https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/GhiDanhKhoaHoc",
+    data: registerInfo.info,
+    headers: {
+      Authorization: `Bearer ${registerInfo.accessToken}`,
+      TokenCybersoft: CYBERSOFT_TOKEN,
+    },
+  });
+};
+
+export const deleteRegisteredCourseApi = (registerInfo) => {
+  return axios({
+    method: "POST",
+    url: "https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/HuyGhiDanh",
+    data: registerInfo.info,
+    headers: {
+      Authorization: `Bearer ${registerInfo.accessToken}`,
+      TokenCybersoft: CYBERSOFT_TOKEN,
+    },
+  });
+};

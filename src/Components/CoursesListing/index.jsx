@@ -1,9 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { removeCourse } from "../../Redux/Reducers/userReducer";
 import { removeRegisteredCourseApi } from "../../Services/course";
 import { getLocal } from "../../Ultis/config";
 
 export default function CoursesListing(props) {
+  const dispatch = useDispatch();
   const { courseList, isCancel } = props;
   let userCredentials = null;
   if (isCancel) {
@@ -63,8 +66,11 @@ export default function CoursesListing(props) {
                             };
 
                             removeRegisteredCourseApi(registerInfo)
-                              .then((res) => console.log(res.data))
-                              .catch((err) => console.log(err));
+                              .then((res) => {
+                                alert(res.data);
+                                dispatch(removeCourse(course.maKhoaHoc));
+                              })
+                              .catch((err) => alert(err.response.data));
                           }
                         }}
                       >

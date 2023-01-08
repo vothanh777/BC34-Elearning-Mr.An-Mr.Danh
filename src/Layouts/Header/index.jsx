@@ -12,7 +12,7 @@ import { GROUP_ID } from "../../Ultis/constants";
 import { getLocal, removeLocal } from "../../Ultis/config";
 import { useState } from "react";
 
-export default function Header(props) {
+export default function Header() {
   const dispatch = useDispatch();
   const [userCredentials, setUserCredentials] = useState(null);
 
@@ -79,11 +79,7 @@ export default function Header(props) {
                   return (
                     <NavLink
                       key={index}
-                      className={
-                        props.categoryId == category.maDanhMuc
-                          ? "dropdown-item bg-primary"
-                          : "dropdown-item"
-                      }
+                      className="dropdown-item"
                       to={`/courseCategories?maDanhMuc=${category.maDanhMuc}&maNhom=${GROUP_ID}`}
                     >
                       {category.tenDanhMuc}
