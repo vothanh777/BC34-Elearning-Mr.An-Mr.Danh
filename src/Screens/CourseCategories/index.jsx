@@ -49,7 +49,7 @@ export default function CourseCategories() {
   // end pagination
 
   useEffect(() => {
-    getCoursesByCategoryApi(categoryId, groupId)
+    getCoursesByCategoryApi(categoryId)
       .then((res) => {
         setCategoryName(res.data[0].danhMucKhoaHoc.tenDanhMucKhoaHoc);
         setCourseListByCategory(res.data);

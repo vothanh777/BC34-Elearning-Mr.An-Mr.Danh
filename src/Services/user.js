@@ -143,3 +143,39 @@ export const getRegisteredCoursesApi = (user) => {
     },
   });
 };
+
+export const getUnregisteredUsersApi = ({ accessToken, info }) => {
+  return axios({
+    method: "POST",
+    url: "https://elearningnew.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungChuaGhiDanh",
+    data: info,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      TokenCybersoft: CYBERSOFT_TOKEN,
+    },
+  });
+};
+
+export const getUnauthorizedUsersApi = ({ accessToken, info }) => {
+  return axios({
+    method: "POST",
+    url: "https://elearningnew.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet",
+    data: info,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      TokenCybersoft: CYBERSOFT_TOKEN,
+    },
+  });
+};
+
+export const getUsersOnCourseApi = ({ accessToken, info }) => {
+  return axios({
+    method: "POST",
+    url: "https://elearningnew.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc",
+    data: info,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      TokenCybersoft: CYBERSOFT_TOKEN,
+    },
+  });
+};

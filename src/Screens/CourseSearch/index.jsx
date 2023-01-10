@@ -23,7 +23,7 @@ export default function CourseSearch() {
   const [searchCourseList, setSearchCourseList] = useState([]);
 
   const getCoursesBySearchPagination = (page) => {
-    return getCoursesBySearchPaginationApi(keyword, GROUP_ID, page, pageSize);
+    return getCoursesBySearchPaginationApi(keyword, page, pageSize);
   };
 
   //pagination

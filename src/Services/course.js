@@ -31,35 +31,30 @@ export const getCourseCategoriesApi = () => {
   });
 };
 
-export const getCoursesByCategoryApi = (categoryId, groupId) => {
+export const getCoursesByCategoryApi = (categoryId) => {
   return axios({
     method: "GET",
-    url: `https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${categoryId}&MaNhom=${groupId}`,
+    url: `https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${categoryId}&MaNhom=${GROUP_ID}`,
     headers: {
       TokenCybersoft: CYBERSOFT_TOKEN,
     },
   });
 };
 
-export const getCoursesBySearchApi = (searchText, groupId) => {
+export const getCoursesBySearchApi = (searchText) => {
   return axios({
     method: "GET",
-    url: `https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${searchText}&MaNhom=${groupId}`,
+    url: `https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${searchText}&MaNhom=${GROUP_ID}`,
     headers: {
       TokenCybersoft: CYBERSOFT_TOKEN,
     },
   });
 };
 
-export const getCoursesBySearchPaginationApi = (
-  searchText,
-  groupId,
-  page,
-  pageSize
-) => {
+export const getCoursesBySearchPaginationApi = (searchText, page, pageSize) => {
   return axios({
     method: "GET",
-    url: `https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?tenKhoaHoc=${searchText}&page=${page}&pageSize=${pageSize}&MaNhom=${groupId}`,
+    url: `https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?tenKhoaHoc=${searchText}&page=${page}&pageSize=${pageSize}&MaNhom=${GROUP_ID}`,
     headers: {
       TokenCybersoft: CYBERSOFT_TOKEN,
     },
@@ -109,6 +104,40 @@ export const deleteRegisteredCourseApi = (registerInfo) => {
     data: registerInfo.info,
     headers: {
       Authorization: `Bearer ${registerInfo.accessToken}`,
+      TokenCybersoft: CYBERSOFT_TOKEN,
+    },
+  });
+};
+
+export const deleteCourseApi = ({ accessToken, maKhoaHoc }) => {
+  return axios({
+    method: "DELETE",
+    url: `https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/XoaKhoaHoc?maKhoaHoc=${maKhoaHoc}`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      TokenCybersoft: CYBERSOFT_TOKEN,
+    },
+  });
+};
+
+export const addCourseApi = (info) => {
+  return axios({
+    method: "POST",
+    url: "https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/ThemKhoaHoc",
+    data: info.data,
+    headers: {
+      Authorization: `Bearer ${info.accessToken}`,
+      TokenCybersoft: CYBERSOFT_TOKEN,
+    },
+  });
+};
+
+export const updateCoursesApi = (course) => {
+  return axios({
+    method: "PUT",
+    url: "https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/CapNhatKhoaHoc",
+    data: course,
+    headers: {
       TokenCybersoft: CYBERSOFT_TOKEN,
     },
   });

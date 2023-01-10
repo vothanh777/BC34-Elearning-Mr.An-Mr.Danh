@@ -464,10 +464,11 @@ export default function UserManagement() {
             };
             if (isAdd) {
               addUserApi({ accessToken, info })
-                .then((res) => fetchUsers())
+                .then((res) => {
+                  fetchUsers();
+                  form.resetFields();
+                })
                 .catch((err) => isAdd && alert(err.response.data));
-
-              form.resetFields();
             } else {
               updateUserApi({ accessToken, info })
                 .then((res) => fetchUsers())
@@ -612,21 +613,6 @@ export default function UserManagement() {
             name="courseRegister"
             onFinish={({ maKhoaHoc }) => {
               registerCourseForUser(maKhoaHoc);
-              // const registerInfo = {
-              //   accessToken,
-              //   info: {
-              //     maKhoaHoc,
-              //     taiKhoan: userId,
-              //   },
-              // };
-
-              // registerCourseForUserApi(registerInfo)
-              //   .then((res) => {
-              //     //refresh select options
-              //     getCourseOptions({ accessToken, taiKhoan: userId });
-              //     form1.resetFields();
-              //   })
-              //   .catch((err) => console.log(err));
             }}
           >
             <Row>

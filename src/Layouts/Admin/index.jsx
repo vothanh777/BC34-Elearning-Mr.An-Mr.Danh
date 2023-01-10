@@ -26,7 +26,7 @@ export default function AdminLayout() {
   };
   return (
     <>
-      {userCredentials ? (
+      {userCredentials && (
         <div className="adminLayout">
           <div>
             {/*Main Navigation*/}
@@ -159,8 +159,6 @@ export default function AdminLayout() {
             {/*Main layout*/}
           </div>
         </div>
-      ) : (
-        ""
       )}
     </>
   );

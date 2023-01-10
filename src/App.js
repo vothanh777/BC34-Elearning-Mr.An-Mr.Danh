@@ -27,7 +27,7 @@ function App() {
     if (user) {
       dispatch(signIn(user));
     }
-  }, [user]);
+  }, []);
   return (
     <div className="App">
       <Routes>
@@ -41,6 +41,7 @@ function App() {
           <Route path="/userinfo" element={<UserInfo />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+
         {user && user.maLoaiNguoiDung == "GV" ? (
           <Route element={<AdminLayout />}>
             <Route path="/admin/usermanagement" element={<UserManagement />} />
