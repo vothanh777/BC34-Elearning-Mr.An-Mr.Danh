@@ -32,7 +32,7 @@ export default function SignIn() {
       >
         {({ handleChange }) => (
           <Form className="w-50 mx-auto mt-3 text-left">
-            <h1 className="text-center">Đăng nhập</h1>
+            <h2 className="text-center">Đăng nhập</h2>
             <div className="form-group">
               <label>Tài khoản</label>
               <Field

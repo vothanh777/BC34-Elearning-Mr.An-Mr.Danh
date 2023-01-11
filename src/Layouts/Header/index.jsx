@@ -89,29 +89,34 @@ export default function Header() {
               </div>
             </li>
           </ul>
-          <Formik
-            initialValues={{ searchText: keyword }}
-            onSubmit={({ searchText }) => {
-              navigate(`/coursesearch?tenkhoahoc=${searchText}`);
-            }}
-          >
-            {(props) => (
-              <Form className="my-2 my-lg-0">
-                <Field
-                  className="form-control mr-sm-2 courseSearch"
-                  type="search"
-                  placeholder="Tìm khoá học"
-                  name="searchText"
-                  value={props.values.searchText}
-                  onChange={(e) => {
-                    props.handleChange(e);
-                  }}
-                />
-              </Form>
-            )}
-          </Formik>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Formik
+              initialValues={{ searchText: keyword }}
+              onSubmit={({ searchText }) => {
+                navigate(`/coursesearch?tenkhoahoc=${searchText}`);
+              }}
+            >
+              {(props) => (
+                <Form className="my-2 my-lg-0">
+                  <Field
+                    className="form-control mr-sm-2 courseSearch"
+                    type="search"
+                    placeholder="Tìm khoá học"
+                    name="searchText"
+                    value={props.values.searchText}
+                    onChange={(e) => {
+                      props.handleChange(e);
+                    }}
+                  />
+                </Form>
+              )}
+            </Formik>
+          </div>
 
-          <div className="user ml-xl-2 text-left">
+          <div
+            className="user ml-xl-2 text-left"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             {userCredentials ? (
               <div
                 className="text-light dropdown"
@@ -122,6 +127,14 @@ export default function Header() {
                   <span className="h6">{userCredentials.hoTen}</span>
                 </a>
                 <div className="dropdown-menu p-0">
+                  {userCredentials.maLoaiNguoiDung == "GV" && (
+                    <NavLink
+                      className="dropdown-item bg-light userInfo"
+                      to="/admin/usermanagement"
+                    >
+                      Admin
+                    </NavLink>
+                  )}
                   <NavLink
                     className="dropdown-item bg-light userInfo"
                     to="/userinfo"

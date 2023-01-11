@@ -25,7 +25,7 @@ export default function CoursesListing(props) {
             }}
           >
             <div className="row">
-              <div className="col-3">
+              <div className="col-lg-3">
                 <img
                   style={{ height: 150 }}
                   src={course.hinhAnh}
@@ -33,7 +33,7 @@ export default function CoursesListing(props) {
                   className="img-fluid"
                 />
               </div>
-              <div className="col-9">
+              <div className="col-lg-9">
                 <h1>
                   <NavLink
                     style={{

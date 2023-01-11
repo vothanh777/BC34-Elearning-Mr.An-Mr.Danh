@@ -438,6 +438,7 @@ export default function UserManagement() {
 
       {/* Modal */}
       <Modal
+        style={{ height: "calc(100vh - 200px)" }}
         title={isAdd ? "Thêm người dùng" : "Sửa thông tin người dùng"}
         centered
         open={open}
