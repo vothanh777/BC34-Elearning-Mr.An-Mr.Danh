@@ -29,7 +29,9 @@ import {
 import { getLocal } from "../../Ultis/config";
 import { GROUP_ID } from "../../Ultis/constants";
 
-const { accessToken } = getLocal("userCredentials");
+const accessToken = getLocal("userCredentials")
+  ? getLocal("userCredentials")
+  : "";
 export default function UserManagement() {
   const [userList, setUserList] = useState([]);
 

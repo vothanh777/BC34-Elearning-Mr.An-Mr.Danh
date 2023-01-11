@@ -37,7 +37,15 @@ import { getLocal } from "../../Ultis/config";
 import { GROUP_ID } from "../../Ultis/constants";
 import TextArea from "antd/es/input/TextArea";
 
-const { accessToken, hoTen, taiKhoan } = getLocal("userCredentials");
+const userCredentials = getLocal("userCredentials");
+let accessToken = "";
+let hoTen = "";
+let taiKhoan = "";
+if (userCredentials) {
+  accessToken = userCredentials.accessToken;
+  hoTen = userCredentials.hoTen;
+  taiKhoan = userCredentials.taiKhoan;
+}
 export default function CourseManagement() {
   const [courseList, setCourseList] = useState([]);
 
